@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
-
 import static com.duksung.dukjins.config.BaseResponseStatus.SUCCESS;
 
 @Getter
@@ -20,7 +18,6 @@ public class BaseResponse<T> {
     private final int code;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T result;
-    private List list;
 
     // 요청에 성공한 경우
     public BaseResponse(T result) {
@@ -29,18 +26,10 @@ public class BaseResponse<T> {
         this.code = SUCCESS.getCode();
         this.result = result;
     }
-
     public BaseResponse() {
         this.isSuccess = SUCCESS.isSuccess();
         this.message = SUCCESS.getMessage();
         this.code = SUCCESS.getCode();
-    }
-
-    public BaseResponse(List list) {
-        this.isSuccess = SUCCESS.isSuccess();
-        this.message = SUCCESS.getMessage();
-        this.code = SUCCESS.getCode();
-        this.list = list;
     }
 
     // 요청에 실패한 경우
