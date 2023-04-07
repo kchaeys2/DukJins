@@ -1,6 +1,7 @@
 package com.duksung.dukjins.src.route;
 
 import com.duksung.dukjins.config.BaseResponseStatus;
+import com.duksung.dukjins.src.route.model.post.PostObjectReq;
 import com.duksung.dukjins.src.route.model.post.PostRouteReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,18 @@ public class RouteDao {
         }
 
         this.jdbcTemplate.update(createRouteQuery,createRouteParams);
+
+        return BaseResponseStatus.SUCCESS;
+    }
+
+    //장애물 저장
+    public BaseResponseStatus createObj(PostObjectReq postObjectReq){
+        String createObjQuery = "insert into object(routeIdx,pointX,pointY) values (?,?,?)";
+        String lastInsertIdQuery = "select max(routeIdx) from route";
+        int lastIdx = this.jdbcTemplate.queryForObject(lastInsertIdQuery, int.class);
+        postObjectReq.setRouteIdx(lastIdx);
+        Object[] createObjParms = new Object[]{postObjectReq.getRouteIdx(),postObjectReq.getPointX(),postObjectReq.getPointY()};
+        this.jdbcTemplate.update(createObjQuery,createObjParms);
 
         return BaseResponseStatus.SUCCESS;
     }
