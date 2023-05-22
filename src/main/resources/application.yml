@@ -1,16 +1,17 @@
-
-server:
-  port: 9000  # 9000번 포트로 실행
-
 spring:
-  application:
-    name: I
-
   datasource:
-    url: jdbc:mysql://localhost/dukjins
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dukjins?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: root
     password: DBcodus1206^^
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  sql:
-    init:
-      platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+logging:
+  level:
+    org.hibernate.sql: debug  # ?? logger? ?? ??? ????
