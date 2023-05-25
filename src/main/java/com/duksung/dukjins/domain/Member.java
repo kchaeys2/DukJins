@@ -2,12 +2,12 @@ package com.duksung.dukjins.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +16,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Long memberId;
+    private Long id;
     @Column(nullable = false,length = 50)
     private String nickname;
     @Column(nullable = false,length = 100)
@@ -26,6 +26,14 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
     private LocalDateTime createAt;
+    @OneToMany(mappedBy = "member")
+    private List<Route> routes = new ArrayList<>();
+
+    //연관 관계
+    public void addRoutes(Route route){
+        routes.add(route);
+        route.setMember(this);
+    }
     //생성자
     public static Member creatMember(String nickname,String email,String pw,
                                      MemberStatus status){

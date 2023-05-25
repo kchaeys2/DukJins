@@ -1,7 +1,11 @@
 package com.duksung.dukjins.src.route.dto;
 
+import com.duksung.dukjins.domain.Point;
 import com.duksung.dukjins.domain.RouteStatus;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class RouteReq {
@@ -12,6 +16,7 @@ public class RouteReq {
     private RouteStatus status;
     private int mark;
     private int good;
-    private float pointX;
-    private float pointY;
+    private List<Point> passPoints;
+    private List<Point> objectPoints;
+
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "objects")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Object {
@@ -13,11 +14,17 @@ public class Object {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Object_id")
     private Long objectId;
-    @Column(nullable = false)
-    private Long routeId;
-    @Column(nullable = false)
-    private Float pointX;
-    @Column(nullable = false)
-    private Float pointY;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false,name = "route_id")
+    private Route routes;
+    @Embedded
+    private Point point;
 
+    public void setRoute(Route route) {
+        routes = route;
+    }
+    public void setPoint(Point point){
+        this.point = point;
+    }
+    //연관관계
 }
