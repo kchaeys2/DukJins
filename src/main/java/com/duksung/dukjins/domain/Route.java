@@ -79,7 +79,7 @@ public class Route {
 
         route.createAt = LocalDateTime.now();
 
-        if(passPoints != null){
+        if(passPoints.size() != 0){
             for (Point point:passPoints){
                 PassPoint passPoint = new PassPoint();
                 passPoint.setPoint(point);
@@ -96,5 +96,12 @@ public class Route {
         }
 
         return route;
+    }
+    /**setter**/
+    public void setMark(int mark){
+        this.mark = mark;
+    }
+    public void setRouteName(String routeName){
+        this.routeName = routeName;
     }
 }

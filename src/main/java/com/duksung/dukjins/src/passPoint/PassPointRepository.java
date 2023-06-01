@@ -2,6 +2,7 @@ package com.duksung.dukjins.src.passPoint;
 
 import com.duksung.dukjins.domain.Object;
 import com.duksung.dukjins.domain.PassPoint;
+import com.duksung.dukjins.domain.Point;
 import com.duksung.dukjins.domain.Route;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,10 @@ public class PassPointRepository {
             em.persist(passPoint);
         }
     }
-    public List<PassPoint> findList(Route route){
-        return em.createQuery("select routes,point from PassPoint "+
-                        "where routes = :routeId", PassPoint.class)
-                .setParameter("routeId",route)
+    public List<Point> findAll(Long routeId){
+        return em.createQuery("select p.point from PassPoint p "+
+                        "where routes.id = :routeId", Point.class)
+                .setParameter("routeId",routeId)
                 .getResultList();
     }
 }

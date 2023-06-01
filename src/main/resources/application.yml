@@ -1,12 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dukjins?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: root
-    password: DBcodus1206^^
+    url: jdbc:mysql://db-dukjins.c8a1us0pywlg.ap-northeast-2.rds.amazonaws.com/DBdukjins
+    username: admin
+    password: DBdukjins0321
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
