@@ -24,16 +24,12 @@ public class Route {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-    private String routeName;
     private String startPoint;
     private String endPoint;
     @OneToMany(mappedBy = "routes")
     private List<PassPoint> passPoints = new ArrayList<>();
     @OneToMany(mappedBy = "routes")
     private List<Object> objects = new ArrayList<>();
-    @Column(length = 1)
-    @ColumnDefault("0")
-    private int mark;
     @Column(length = 1)
     @ColumnDefault("0")
     private int good;
@@ -55,20 +51,13 @@ public class Route {
     }
 
     /**생성자**/
-    public static Route createRoute(Member member, String routeName, String startPoint, String endPoint, int mark, int good,RouteStatus status,
+    public static Route createRoute(Member member, String startPoint, String endPoint, int good,RouteStatus status,
                                     List<Point> passPoints, List<Point> objectPoints){
         Route route = new Route();
         route.setMember(member);
 
-        if(routeName != null){
-            route.routeName = routeName;
-        }else{
-            route.routeName = endPoint;
-        }
-
         route.startPoint = startPoint;
         route.endPoint = endPoint;
-        route.mark = mark;
         route.good = good;
 
         if(status != null){
@@ -96,12 +85,5 @@ public class Route {
         }
 
         return route;
-    }
-    /**setter**/
-    public void setMark(int mark){
-        this.mark = mark;
-    }
-    public void setRouteName(String routeName){
-        this.routeName = routeName;
     }
 }

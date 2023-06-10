@@ -28,7 +28,8 @@ public class Member {
     private LocalDateTime createAt;
     @OneToMany(mappedBy = "member")
     private List<Route> routes = new ArrayList<>();
-
+    @OneToMany(mappedBy = "member")
+    private List<Mark> marks = new ArrayList<>();
     //연관 관계
     public void addRoutes(Route route){
         routes.add(route);
