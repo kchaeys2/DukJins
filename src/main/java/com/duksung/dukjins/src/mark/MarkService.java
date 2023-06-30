@@ -7,6 +7,7 @@ import com.duksung.dukjins.src.mark.dto.MarkNameReq;
 import com.duksung.dukjins.src.mark.dto.MarkReq;
 import com.duksung.dukjins.src.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class MarkService {
     private final MarkRepository markRepository;
     private final MemberRepository memberRepository;
@@ -36,7 +38,7 @@ public class MarkService {
     @Transactional
     public void patchMarkName(MarkNameReq nameReq){
         Mark mark = markRepository.changeMark(nameReq.getId());
-        mark.setMarkName(nameReq.getName());
+        mark.setMarkName(mark,nameReq.getName());
     }
     //즐겨찾기 삭제
     @Transactional

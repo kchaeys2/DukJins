@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Slf4j
 public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +49,8 @@ public class Mark {
         mark.updateAt = LocalDateTime.now();
     }
     //즐겨찾기 이름 수정
-    public void setMarkName(String markName){
-        this.markName = markName;
+    public void setMarkName(Mark mark,String markName){
+        mark.markName = markName;
+        mark.updateAt = LocalDateTime.now();
     }
 }
